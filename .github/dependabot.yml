@@ -7,8 +7,7 @@ updates:
       day: "saturday"
       time: "00:00"
     commit-message:
-      prefix: ""
-      prefix-development: "dev"
+      prefix: "ci: "
       include: "scope"
     labels:
       - "dependencies"
@@ -23,8 +22,7 @@ updates:
       day: "saturday"
       time: "00:00"
     commit-message:
-      prefix: ""
-      prefix-development: "dev"
+      prefix: "ci: "
       include: "scope"
     labels:
       - "dependencies"
