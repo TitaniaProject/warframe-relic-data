@@ -2,43 +2,52 @@
   "name": "@wfcd/relics",
   "version": "2.0.18",
   "description": "Relic Data for Warframe",
-  "main": "dist/index.js",
-  "files": [
-    "dist/index.d.ts",
-    "dist/index.mjs",
-    "dist/index.js"
+  "keywords": [
+    "Warframe",
+    "Relics"
   ],
-  "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
-  },
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsup ./src/index.ts ./src/Build.ts",
-    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "postinstall": "npx install-peerdeps @wfcd/eslint-config@latest -S",
-    "prepack": "npm run build",
-    "start": "npm run build && node dist/Build.js",
-    "test": "nyc mocha",
-    "validate": "tsc --noEmit"
+  "homepage": "https://github.com/WFCD/warframe-relic-data#readme",
+  "bugs": {
+    "url": "https://github.com/WFCD/warframe-relic-data/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/WFCD/warframe-relic-data.git"
   },
-  "keywords": [
-    "Warframe",
-    "Relics"
-  ],
-  "author": "Soundofdarkness",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/WFCD/warframe-relic-data/issues"
+  "author": "Soundofdarkness",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
-  "homepage": "https://github.com/WFCD/warframe-relic-data#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/index.d.ts",
+    "dist/index.mjs",
+    "dist/index.js"
+  ],
+  "scripts": {
+    "build": "tsup ./src/index.ts ./src/Build.ts",
+    "coverage": "npm test && nyc report --reporter=text-lcov | coveralls",
+    "postinstall": "npx install-peerdeps @wfcd/eslint-config@latest -S",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepack": "npm run build",
+    "prepare": "husky",
+    "start": "npm run build && node dist/Build.js",
+    "test": "nyc mocha",
+    "validate": "tsc --noEmit"
+  },
+  "prettier": "@wfcd/eslint-config/prettier",
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "warframe-patchlogs": "^2.3.3"
+  },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@commitlint/types": "^19.5.0",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^10.0.0",
     "@types/node": "^22.1.0",
@@ -46,99 +55,18 @@
     "@wfcd/eslint-config": "^1.2.0",
     "chai": "^4.3.6",
     "coveralls": "^3.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
     "mocha": "^10.0.0",
     "nyc": "^17.0.0",
-    "precommit-hook": "^3.0.0",
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
     "tsup": "^8.0.2",
     "typescript": "^5.0.4"
   },
-  "dependencies": {
-    "node-fetch": "^2.6.7",
-    "warframe-patchlogs": "^2.3.3"
-  },
-  "eslintIgnore": [
-    "dist/**"
-  ],
-  "eslintConfig": {
-    "extends": [
-      "@wfcd/eslint-config/typescript"
-    ],
-    "parserOptions": {
-      "project": "tsconfig.json"
-    }
-  },
-  "prettier": "@wfcd/eslint-config/prettier",
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-private-methods"
-    ]
-  },
-  "release": {
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
-      "@semantic-release/github",
-      [
-        "@semantic-release/changelog",
-        {
-          "assets": [
-            "CHANGELOG.md"
-          ]
-        }
-      ],
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "package.json",
-            "package-lock.json",
-            "CHANGELOG.md"
-          ]
-        }
-      ]
-    ],
-    "branches": "development"
-  },
-  "mocha": {
-    "exit": true,
-    "spec": "src/spec/**/*.spec.ts",
-    "timeout": "1000",
-    "loader": "ts-node/esm",
-    "extension": "ts"
-  },
-  "nyc": {
-    "exclude": [
-      "src/spec/**",
-      "dist/**"
-    ],
-    "skip-full": true,
-    "reporter": [
-      "lcov",
-      "text"
-    ]
-  },
-  "pre-commit": [
-    "lint",
-    "test",
-    "validate"
-  ],
-  "tsup": {
-    "dts": true,
-    "clean": true,
-    "keepNames": true,
-    "target": "node14",
-    "splitting": false,
-    "format": [
-      "cjs",
-      "esm"
-    ]
+  "overrides": {
+    "cross-spawn": "^7.0.4",
+    "tough-cookie": "^4.1.3"
   }
 }
